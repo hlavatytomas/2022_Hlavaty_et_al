@@ -1,0 +1,228 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      sample;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+type surfaces;
+libs            ("libsampling.so");
+
+interpolationScheme cell;
+
+surfaceFormat       vtk;
+
+fields          (U p k);
+
+surfaces
+(
+    plochaHor1
+    {
+        type    plane;
+        planeType pointAndNormal;
+        
+        pointAndNormalDict
+        {
+            point (0 0 0.095);
+            normal (0 0 1);
+        }
+        
+        bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane1CZS;
+        //~triangulate false;
+    }
+    plochaHor2
+    {
+        type    plane;
+        planeType pointAndNormal;
+        
+        pointAndNormalDict
+        {
+            point (0 0 0.11);
+            normal (0 0 1);
+        }
+        
+        bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane1CZS;
+        //~triangulate false;
+    }
+    plochaHor3
+    {
+        type    plane;
+        planeType pointAndNormal;
+        
+        pointAndNormalDict
+        {
+            point (0 0 0.125);
+            normal (0 0 1);
+        }
+        
+        bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane1CZS;
+        //~triangulate false;
+    }
+    plochaHor4
+    {
+        type    plane;
+        planeType pointAndNormal;
+        
+        pointAndNormalDict
+        {
+            point (0 0 0.14);
+            normal (0 0 1);
+        }
+        
+        bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane1CZS;
+        //~triangulate false;
+    }
+    plochaHor5
+    {
+        type    plane;
+        planeType pointAndNormal;
+        
+        pointAndNormalDict
+        {
+            point (0 0 0.155);
+            normal (0 0 1);
+        }
+        
+        bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane1CZS;
+        //~triangulate false;
+    }
+    plochaVer
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.05745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    //~triSurfaceSampling
+    plochaVer1
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.08745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    plochaVer2
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.11745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    plochaVer3
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.14745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    plochaVer4
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.17745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    plochaVer5
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.20745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    plochaVer6
+    {
+        type    plane;
+        planeType pointAndNormal;
+
+        pointAndNormalDict
+        {
+            point (0.23745 0 0.125);
+            normal (1 0 0);
+
+        }
+
+        //bounds (-0.00755 -0.033 0.0) (0.105 0.033 0.0);
+        zone plane2CZS;
+        //~triangulate false;
+    }
+    //~{
+        //~// Sampling on triSurface
+        //~type        sampledTriSurfaceMesh;
+        //~surface     plane1.stl;
+        //~source      cells;  // sample cells or boundaryFaces
+        //~interpolate false;
+    //~}
+);
+
+
+
+// ************************************************************************* //

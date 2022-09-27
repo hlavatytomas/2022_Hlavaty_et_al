@@ -1,0 +1,43 @@
+#!/bin/sh
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Clear old IC
+rm -rf 0
+
+# copy IC
+mkdir 0
+cp -rf 0.org/* 0
+
+# create base mesh 
+runApplication blockMesh
+runApplication decomposePar
+runParallel snappyHexMesh -overwrite
+runApplication reconstructParMesh -constant #-mergeTol 1 -- for openfoam6
+
+# create slipBC 
+runApplication topoSet -dict system/topoSetDict.1
+runApplication createPatch -overwrite
+runApplication renumberMesh -overwrite
+mv log.renumberMesh log.renumberMeshSerial
+
+# create files for postprocessing
+paraFoam -touch
+mv log.topoSet log.topoSet1
+runApplication topoSet
+
+# decompose with correct bc
+rm -r processor*
+mv log.decomposePar log.decomposePar.1
+runApplication decomposePar
+runParallel renumberMesh -overwrite -parallel
+
+# get the solver application
+application=`getApplication`
+
+# run the application
+runParallel $application
+
+# reconstruct
+runApplication reconstructPar
+runApplication postProcess -func sample
+

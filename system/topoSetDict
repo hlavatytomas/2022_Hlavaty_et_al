@@ -1,0 +1,135 @@
+/*--------------------------------*- C++ -*----------------------------------*\ 
+| ========                 |                                                 | 
+| \      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           | 
+|  \    /   O peration     | Version:  4.1                                   | 
+|   \  /    A nd           | Web:      www.OpenFOAM.org                      | 
+|    \/     M anipulation  |                                                 | 
+\*---------------------------------------------------------------------------*/ 
+FoamFile 
+{ 
+ 	 version 	 2.0; 
+ 	 format 	 ascii; 
+ 	 class 		 dictionary; 
+ 	 object 	 topoSetDict; 
+} 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * // 
+
+actions
+(
+    //~{
+        //~name    plane1FS;
+        //~type    faceSet;
+        //~action  new;
+        //~source boxToFace;
+        //~sourceInfo
+            //~{
+            //~box  (-0.00755 -0.050 0.1249) (0.12755 0.050 0.1251);
+            //~//boxes   ((0 0 0) (1 1 1) (10 10 10)(11 11 11));
+            //~}
+    //~}
+    //~{
+        //~name    plane1FZ;
+        //~type    faceZoneSet;
+        //~action  new;
+        //~source  setToFaceZone;
+        //~sourceInfo
+        //~{
+            //~faceSet plane1FS;
+        //~}
+    //~}
+    {
+        name    plane1CS;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            //~box  (-0.00755 -0.050 0.1) (0.12755 0.050 0.2);
+            box  (-0.00755 -0.03 0.08) (0.105 0.03 0.17);
+            //~box  (0 0 0) (1 1 1);
+        }
+    }
+    {
+        name    plane1CZS;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set plane1CS;
+        }
+    }
+	    {
+        name    plane2CS;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            //~box  (-0.00755 -0.050 0.1) (0.12755 0.050 0.2);
+            box  (0.0565 -0.03 0.08) (0.24 0.03 0.17);
+            //~box  (0 0 0) (1 1 1);
+        }
+    }
+    {
+        name    plane2CZS;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set plane2CS;
+        }
+    }
+    {
+	name	toDel;
+	type	faceSet;
+	action	new;
+	source	patchToFace;
+	sourceInfo
+	{
+		name	inlet;	
+	}
+    }
+    {
+	name 	inBox;
+	type 	faceSet;
+	action 	new;
+	source	boxToFace;
+	sourceInfo
+	{
+		box (-0.048 -0.1235 0.0015)(-0.045 0.1235 0.2485); 
+	}
+    }
+   {
+	name	toDel;
+	type	faceSet;
+	action	delete;	
+	source	faceToFace;
+	sourceInfo
+	{
+		set	inBox;	
+	}
+  }
+    {
+	name 	inletN;
+	type	faceSet;
+	action 	new;
+	source	patchToFace;
+	sourceInfo
+	{
+		name	inlet;
+	}
+    }
+    {
+	name 	inletN;
+	type	faceSet;
+	action	delete;
+	source	faceToFace;
+	sourceInfo
+	{
+		set toDel;
+	}
+    }
+);
+// ************************************************************************* //
